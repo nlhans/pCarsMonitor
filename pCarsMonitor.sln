@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pCarsMonitor", "pCarsMonitor\pCarsMonitor.csproj", "{DE60C8F2-75C7-4B5A-93B0-B238132140EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE60C8F2-75C7-4B5A-93B0-B238132140EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE60C8F2-75C7-4B5A-93B0-B238132140EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE60C8F2-75C7-4B5A-93B0-B238132140EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE60C8F2-75C7-4B5A-93B0-B238132140EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
