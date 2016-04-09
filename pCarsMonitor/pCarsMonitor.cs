@@ -13,7 +13,7 @@ using pCarsMonitor.Usercontrols;
 
 namespace pCarsMonitor
 {
-    public partial class Form1 : Form
+    public partial class pCarsMonitor : Form
     {
         private DataController data = new DataController();
         private DataSerializer serializer;
@@ -23,7 +23,7 @@ namespace pCarsMonitor
         private ucTimingchart timing;
         private ucCarState car;
 
-        public Form1()
+        public pCarsMonitor()
         {
             var dbg = new Debug(data);
             dbg.Show();
@@ -60,11 +60,6 @@ namespace pCarsMonitor
             timing.Location = new Point(this.Width/2, lapsHeight);
             timing.Size = new Size(this.Width/2, timingHeight);
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            serializer.Export(false);
         }
     }
 }

@@ -43,18 +43,14 @@ namespace pCarsMonitor.Usercontrols
         {
             if (telemSample.mTyreSlipSpeed == null)
                 return;
-            if (telemSample.mRPM >= 6000)
-                BackColor = Color.Firebrick;
-            else if (telemSample.mTyreSlipSpeed[0] > 5 || telemSample.mTyreSlipSpeed[1] > 5)
-                BackColor = Color.Blue;
-            else
-                BackColor = Color.Black;
+            BackColor = Color.Black;
 
             var me = telemSample.mParticipantData.FirstOrDefault();
+            var fuelL = telemSample.mFuelLevel*telemSample.mFuelCapacity;
             if (fuel.ContainsKey(me.mCurrentLap))
-                fuel[me.mCurrentLap] = Math.Min(fuel[me.mCurrentLap], telemSample.mFuelLevel * telemSample.mFuelCapacity);
+                fuel[me.mCurrentLap] = Math.Min(fuel[me.mCurrentLap],fuelL);
             else
-                fuel.Add(me.mCurrentLap, telemSample.mFuelLevel * telemSample.mFuelCapacity);
+                fuel.Add(me.mCurrentLap, fuelL);
 
             // Consumption
             var fuelS = "";
@@ -70,14 +66,18 @@ namespace pCarsMonitor.Usercontrols
                 lastFuel = kvp.Value;
             }
 
-            label1.Text = string.Format("Damage. Engine: {0:000.00}% Aero: {1:000.00}% Ambient: {2:00.0}C Track: {3:00.0C} Rain: {4}", Math.Round(telemSample.mEngineDamage*100, 3), Math.Round(telemSample.mAeroDamage*100, 2), telemSample.mAmbientTemperature, telemSample.mTrackTemperature, telemSample.mRainDensity);
+            label1.Text = string.Format("Damage: ENG: {0:000.00}% AERO: {1:000}% SUSP: {2} ", 
+                Math.Round(telemSample.mEngineDamage*100, 3), 
+                Math.Round(telemSample.mAeroDamage*100, 2), 
+                string.Join(",", telemSample.mSuspensionDamage.Select(x => (x*100).ToString("000"))));
             label2.Text = string.Format(
-                "Wear FL {0:000.000} FR {1:000.000} LR: {2:000.000} RR {3:000.000}\r\nFuel: {4}\r\nSuspension: {5}",
+                "Wear FL {0:000.00} FR {1:000.00} LR: {2:000.00} RR {3:000.00}\r\nFuel: {4}\r\nAmbient: {5:00.0}C Track: {6:00.0C} Rain: {7}",
                 telemSample.mTyreWear[0]*100,
                 telemSample.mTyreWear[1]*100,
                 telemSample.mTyreWear[2]*100,
-                telemSample.mTyreWear[3]*100, fuelS,
-                string.Join(",", telemSample.mSuspensionDamage.Select(x => (x*100).ToString("000.00"))));
+                telemSample.mTyreWear[3] * 100, fuelS,
+
+                telemSample.mAmbientTemperature, telemSample.mTrackTemperature, telemSample.mRainDensity);
         }
     }
 }
